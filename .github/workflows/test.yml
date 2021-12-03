@@ -1,0 +1,32 @@
+name: test
+
+on:
+  workflow_call:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        go:
+          - 1.17
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Run tests
+        run: go test -v -race -shuffle=on -coverprofile=coverage.txt ./...
+
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v1
+        continue-on-error: true
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ./coverage.txt
+          fail_ci_if_error: false
