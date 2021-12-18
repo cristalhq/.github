@@ -2,15 +2,19 @@ name: test
 
 on:
   workflow_call:
+    inputs:
+      go:
+        description: 'Go version'
+        default: 1.17
+        required: false
+        type: string
 
 jobs:
   run:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
-      matrix:
-        go:
-          - 1.17
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -18,7 +22,7 @@ jobs:
       - name: Install Go
         uses: actions/setup-go@v2
         with:
-          go-version: ${{ matrix.go }}
+          go-version: ${{ inputs.go }}
 
       - name: Run tests
         run: go test -v -race -shuffle=on -coverprofile=coverage.txt ./...
