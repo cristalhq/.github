@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@ec3a7ce # v2.4.0
 
       - name: Install Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@424fc82 # v2.1.5
         with:
           go-version: ${{ inputs.go }}
 
@@ -28,7 +28,7 @@ jobs:
         run: go test -v -race -shuffle=on -coverprofile=coverage.txt ./...
 
       - name: Upload Coverage
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@f32b3a3 # v2.1.0
         continue-on-error: true
         with:
           token: ${{secrets.CODECOV_TOKEN}}
