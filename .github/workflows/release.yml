@@ -1,8 +1,15 @@
 name: release
 
+permissions: read-all
+
 on:
   workflow_call:
     inputs:
+      go:
+        description: 'Go version'
+        default: 1.17
+        required: false
+        type: string
       tag:
         description: 'Tag to create'
         required: true
@@ -11,6 +18,9 @@ on:
 
 jobs:
   run:
+    permissons:
+      packages: write
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
