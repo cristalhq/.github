@@ -19,7 +19,7 @@ on:
 jobs:
   run:
     permissions:
-      packages: write
+      contents: write
 
     runs-on: ubuntu-latest
     steps:
