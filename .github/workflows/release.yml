@@ -1,6 +1,7 @@
 name: release
-
-permissions: read-all
+  
+permissions:
+    contents: write
 
 on:
   workflow_call:
@@ -18,9 +19,6 @@ on:
 
 jobs:
   run:
-    permissions:
-      contents: write
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
