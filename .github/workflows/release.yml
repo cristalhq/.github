@@ -36,6 +36,11 @@ jobs:
       - name: Ping pkg.go.dev
         run: |
           curl --show-error --fail -w "HTTP %{http_code}\n" -o - 'https://pkg.go.dev/fetch/${{ steps.vars.outputs.module }}@${{ steps.vars.outputs.tag }}' \
+            --connect-timeout 5 \
+            --max-time 10 \
+            --retry 10 \
+            --retry-delay 30 \
+            --retry-max-time 600 \
             -X 'POST' \
             -H 'authority: pkg.go.dev' \
             -H 'content-length: 0' \
@@ -50,4 +55,5 @@ jobs:
             -H 'sec-fetch-dest: empty' \
             -H 'referer: https://pkg.go.dev/${{ steps.vars.outputs.module }}@${{ steps.vars.outputs.tag }}' \
             -H 'accept-language: en,en-GB;q=0.9,en-US;q=0.8' \
-            --compressed
+            --compressed \
+            || true # we don't care about success
