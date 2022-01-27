@@ -1,6 +1,7 @@
 name: codeql
 
-permissions: read-all
+permissions:
+  security-events: write
 
 on:
   workflow_call:
@@ -15,10 +16,8 @@ on:
 
 jobs:
   analyze:
-    runs-on: ubuntu-latest
     name: Analyze
-    permissions:
-      security-events: write
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
