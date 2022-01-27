@@ -32,3 +32,22 @@ jobs:
           git log --format="%C(auto) %H %s" `git tag --sort=-committerdate | head -1`...HEAD > changelog.txt
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
           gh release create ${{ github.event.inputs.tag }} -t ${{ github.event.inputs.tag }} -F changelog.txt
+
+      - name: Ping pkg.go.dev
+        run: |
+          curl --show-error --fail -w "HTTP %{http_code}\n" -o - 'https://pkg.go.dev/fetch/${{ steps.vars.outputs.module }}@${{ steps.vars.outputs.tag }}' \
+            -X 'POST' \
+            -H 'authority: pkg.go.dev' \
+            -H 'content-length: 0' \
+            -H 'sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"' \
+            -H 'sec-ch-ua-mobile: ?0' \
+            -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36' \
+            -H 'sec-ch-ua-platform: "macOS"' \
+            -H 'accept: */*' \
+            -H 'origin: https://pkg.go.dev' \
+            -H 'sec-fetch-site: same-origin' \
+            -H 'sec-fetch-mode: cors' \
+            -H 'sec-fetch-dest: empty' \
+            -H 'referer: https://pkg.go.dev/${{ steps.vars.outputs.module }}@${{ steps.vars.outputs.tag }}' \
+            -H 'accept-language: en,en-GB;q=0.9,en-US;q=0.8' \
+            --compressed
