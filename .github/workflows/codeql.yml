@@ -25,10 +25,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2.4.0
+      uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # latest
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@474bbf07f9247ffe1856c6a0f94aeeb10e7afee6 # v1.0.30
+      uses: github/codeql-action/init@474bbf07f9247ffe1856c6a0f94aeeb10e7afee6 # latest
       with:
         languages: go
         # If you wish to specify custom queries, you can do so here or in a config file.
@@ -37,9 +37,9 @@ jobs:
         # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
     - name: Install Go
-      uses: actions/setup-go@bfdd3570ce990073878bf10f6b2d79082de49492 # v2.1.5
+      uses: actions/setup-go@bfdd3570ce990073878bf10f6b2d79082de49492 # latest
       with:
         go-version: ${{ inputs.go }}
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@474bbf07f9247ffe1856c6a0f94aeeb10e7afee6 # v1.0.30
+      uses: github/codeql-action/analyze@474bbf07f9247ffe1856c6a0f94aeeb10e7afee6 # latest
