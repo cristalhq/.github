@@ -1,0 +1,33 @@
+name: lint
+
+permissions: read-all
+
+on:
+  workflow_call:
+    inputs:
+      go:
+        description: Go version
+        default: 1.17
+        required: false
+        type: string
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # latest
+
+      - name: Install Go
+        uses: actions/setup-go@f6164bd8c8acb4a71fb2791a8b6c4024ff038dab # latest
+        with:
+          go-version: ${{ inputs.go }}
+
+      - name: Lint
+        uses: golangci/golangci-lint-action@ca6bec4c7571a7e1132ab7ee607390b34fb1c496 # latest
+        with:
+          version: latest
+          args: --timeout 5m
