@@ -29,9 +29,15 @@ jobs:
 
       - name: Create release
         run: |
-          git log --format="%C(auto) %H %s" `git tag --sort=-committerdate | head -1`...HEAD > changelog.txt
-          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
-          gh release create ${{ github.event.inputs.tag }} -t ${{ github.event.inputs.tag }} -F changelog.txt
+          git tag -a ${{ github.event.inputs.tag }} -m ${{ github.event.inputs.tag }}
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@0110a4acb73fda6a2c401b6d1cb70a11d5b0fadf # latest
+        with:
+          version: latest
+          args: release --rm-dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Ping pkg.go.dev
         run: |
