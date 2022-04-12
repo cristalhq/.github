@@ -1,0 +1,27 @@
+env:
+  - GO111MODULE=on
+
+gomod:
+  proxy: true
+
+builds:
+- skip: true
+
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+    - '^docs'
+    - '^test'
+
+release:
+  footer: |
+    **Full Changelog**: https://github.com/goreleaser/goreleaser/compare/{{ .PreviousTag }}...{{ .Tag }}
+
+    ## What to do next?
+
+    - Read the [documentation](https://goreleaser.com/intro/)
+    - Check out the [GoReleaser Pro](https://goreleaser.com/pro) distribution
+    - Join our [Discord server](https://discord.gg/RGEBtg8vQ6)
+    - Follow us on [Twitter](https://twitter.com/goreleaser)
