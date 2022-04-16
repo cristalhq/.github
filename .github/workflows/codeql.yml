@@ -8,7 +8,7 @@ on:
     inputs:
       go:
         description: 'Go version'
-        default: 1.17
+        default: 1.18
         required: false
         type: string
   push:
