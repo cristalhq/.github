@@ -40,6 +40,7 @@ jobs:
       uses: actions/setup-go@f6164bd8c8acb4a71fb2791a8b6c4024ff038dab # latest
       with:
         go-version: ${{ inputs.go }}
+        check-latest: true
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@1ed1437484560351c5be56cf73a48a279d116b78 # latest
