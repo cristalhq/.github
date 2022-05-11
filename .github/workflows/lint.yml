@@ -28,7 +28,7 @@ jobs:
           check-latest: true
 
       - name: Lint
-        uses: golangci/golangci-lint-action@ca6bec4c7571a7e1132ab7ee607390b34fb1c496 # latest
+        uses: golangci/golangci-lint-action@537aa1903e5d359d0b27dbc19ddd22c5087f3fbc # latest
         with:
           version: latest
           args: --timeout 5m
