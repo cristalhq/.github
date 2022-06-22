@@ -28,7 +28,7 @@ jobs:
       uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # latest
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@27ea8f8fe5977c00f5b37e076ab846c5bd783b96 # latest
+      uses: github/codeql-action/init@d00e8c09a38ef8c1ca1091fc55ef490776d2de73 # latest
       with:
         languages: go
         # If you wish to specify custom queries, you can do so here or in a config file.
@@ -43,4 +43,4 @@ jobs:
         check-latest: true
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@27ea8f8fe5977c00f5b37e076ab846c5bd783b96 # latest
+      uses: github/codeql-action/analyze@d00e8c09a38ef8c1ca1091fc55ef490776d2de73 # latest
