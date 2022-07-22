@@ -1,2 +1,2 @@
 # .github
-Common stuff across cristalhq organisation
+Common stuff across cristalhq organization
