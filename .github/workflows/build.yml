@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # latest
 
       - name: Install Go
-        uses: actions/setup-go@84cbf8094393cdc5fe1fe1671ff2647332956b1a # latest
+        uses: actions/setup-go@268d8c0ca0432bb2cf416faae41297df9d262d7f # latest
         with:
           go-version: ${{ inputs.go }}
           check-latest: true
