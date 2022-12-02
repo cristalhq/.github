@@ -37,7 +37,7 @@ jobs:
         # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
     - name: Install Go
-      uses: actions/setup-go@84cbf8094393cdc5fe1fe1671ff2647332956b1a # latest
+      uses: actions/setup-go@d0a58c1c4d2b25278816e339b944508c875f3613 # latest
       with:
         go-version: ${{ inputs.go }}
         check-latest: true
