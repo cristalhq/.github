@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # latest
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # latest
 
       - name: Install Go
         uses: actions/setup-go@84cbf8094393cdc5fe1fe1671ff2647332956b1a # latest
