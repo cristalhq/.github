@@ -3,13 +3,14 @@ name: build
 permissions: read-all
 
 on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+  - cron: '0 10 * * 1'
   workflow_call:
     inputs:
-      go:
-        description: Go version
-        default: 1.19
-        required: false
-        type: string
       race:
         description: Enable Go race detector
         default: "-race"
@@ -21,15 +22,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
+      matrix:
+        go: ['1.19.x', '1.20.x']
 
     steps:
       - name: Checkout code
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # latest
 
       - name: Install Go
-        uses: actions/setup-go@84cbf8094393cdc5fe1fe1671ff2647332956b1a # latest
+        uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # latest
         with:
-          go-version: ${{ inputs.go }}
+          go-version: ${{ matrix.go }}
           check-latest: true
 
       - name: Go Format
@@ -45,10 +48,10 @@ jobs:
         run: go generate ./... && git diff --exit-code
 
       - name: Go Build
-        run: go build -v ./...
+        run: go build -o /dev/null ./...
 
       - name: Go Test
-        run: go test -v ${{ inputs.race }} -shuffle=on -coverprofile=coverage.txt ./...
+        run: go test -v -count=1 ${{ inputs.race }} -shuffle=on -coverprofile=coverage.txt ./...
 
       - name: Upload Coverage
         uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378 # latest
