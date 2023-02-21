@@ -19,6 +19,7 @@ on:
 
 jobs:
   run:
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
