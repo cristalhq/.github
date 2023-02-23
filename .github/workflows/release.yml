@@ -6,11 +6,6 @@ permissions:
 on:
   workflow_call:
     inputs:
-      go:
-        description: 'Go version'
-        default: 1.19
-        required: false
-        type: string
       tag:
         description: 'Tag to create'
         required: true
