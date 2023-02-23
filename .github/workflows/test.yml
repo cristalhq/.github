@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        go: ['1.19.x', '1.20.x']
+        go: ['stable', 'oldstable']
 
     steps:
       - name: Install Go
@@ -21,13 +21,13 @@ jobs:
           check-latest: true
 
       - name: Checkout code
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # latest
+        uses: actions/checkout@v3
 
       - name: Run tests
         run: go test -v -count=1 -race -shuffle=on -coverprofile=coverage.txt ./...
 
       - name: Upload Coverage
-        uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # latest
+        uses: codecov/codecov-action@v3
         continue-on-error: true
         with:
           token: ${{secrets.CODECOV_TOKEN}}

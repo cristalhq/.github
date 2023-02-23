@@ -3,13 +3,11 @@ name: lint
 permissions: read-all
 
 on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_call:
-    inputs:
-      go:
-        description: Go version
-        default: 1.19
-        required: false
-        type: string
 
 jobs:
   run:
@@ -18,8 +16,6 @@ jobs:
     timeout-minutes: 5
     strategy:
       fail-fast: true
-      matrix:
-        go: ['1.19.x', '1.20.x']
 
     steps:
       - name: Checkout code
@@ -28,7 +24,7 @@ jobs:
       - name: Install Go
         uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # latest
         with:
-          go-version: ${{ inputs.go }}
+          go-version: 'stable'
           check-latest: true
 
       - name: Lint
