@@ -60,6 +60,7 @@ jobs:
         run: go test -v -count=1 -race -shuffle=on -coverprofile=coverage.txt ./...
 
       - name: Upload Coverage
+        if: ${{ !inputs.skipTests }}
         uses: codecov/codecov-action@v3
         continue-on-error: true
         with:
