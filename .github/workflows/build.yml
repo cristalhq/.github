@@ -55,6 +55,10 @@ jobs:
       - name: Go Build
         run: go build -o /dev/null ./...
 
+      - name: Go Compile
+        if: ${{ inputs.skipTests }}
+        run: go test -exec /bin/true ./...
+
       - name: Go Test
         if: ${{ !inputs.skipTests }}
         run: go test -v -count=1 -race -shuffle=on -coverprofile=coverage.txt ./...
