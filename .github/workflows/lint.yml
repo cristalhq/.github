@@ -1,6 +1,6 @@
 name: lint
 
-permissions: read-all
+permissions: {} # no need any permissions
 
 on:
   push:
@@ -19,16 +19,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # latest
+        uses: actions/checkout@v3
 
       - name: Install Go
-        uses: actions/setup-go@v4 # latest
+        uses: actions/setup-go@v4
         with:
           go-version: 'stable'
           check-latest: true
 
       - name: Lint
-        uses: golangci/golangci-lint-action@08e2f20817b15149a52b5b3ebe7de50aff2ba8c5 # latest
+        uses: golangci/golangci-lint-action@v3.4.0
         with:
           version: latest
           args: --timeout 5m

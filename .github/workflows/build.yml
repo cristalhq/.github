@@ -1,6 +1,6 @@
 name: build
 
-permissions: read-all
+permissions: {} # no need any permissions
 
 on:
   push:
@@ -55,7 +55,7 @@ jobs:
       - name: Go Build
         run: go build -o /dev/null ./...
 
-      - name: Go Compile
+      - name: Go Compile Tests
         if: ${{ inputs.skipTests }}
         run: go test -exec /bin/true ./...
 
