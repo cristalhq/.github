@@ -1,6 +1,6 @@
 name: vuln
 
-permissions: read-all
+permissions: {} # no need any permissions
 
 on:
   push:
