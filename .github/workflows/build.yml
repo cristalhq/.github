@@ -26,9 +26,14 @@ on:
         default: '1'
         required: false
         type: string
+      groupSuffix:
+        description: 'Concurrency group suffix to allow multiple jobs'
+        default: ''
+        required: false
+        type: string
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}${{ inputs.groupSuffix }}
   cancel-in-progress: true
 
 jobs:
