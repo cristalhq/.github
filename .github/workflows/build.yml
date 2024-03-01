@@ -17,6 +17,10 @@ on:
         required: false
         type: boolean
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   run:
     name: Build
@@ -40,9 +44,6 @@ jobs:
       - name: Go Format
         run: gofmt -s -w . && git diff --exit-code
 
-      - name: Go Vet
-        run: go vet ./...
-
       - name: Go Tidy
         run: go mod tidy && git diff --exit-code
 
@@ -58,6 +59,9 @@ jobs:
       - name: Go Build
         run: go build -o /dev/null ./...
 
+      - name: Go Vet
+        run: go vet ./...
+
       - name: Go Compile Tests
         if: ${{ inputs.skipTests }}
         run: go test -exec /bin/true ./...
@@ -68,7 +72,7 @@ jobs:
 
       - name: Go Benchmark
         if: ${{ !inputs.skipTests }}
-        run: go test -v -shuffle=on -run=- -bench=. -benchtime=1x ./...
+        run: go test -v -shuffle=on -run=^$ -bench=. -benchtime=1x ./...
 
       - name: Upload Coverage
         if: ${{ !inputs.skipTests }}
