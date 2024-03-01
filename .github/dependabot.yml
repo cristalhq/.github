@@ -10,7 +10,7 @@ updates:
       time: "09:00"
   - package-ecosystem: "github-actions"
     commit-message:
-      prefix: "deps:"
+      prefix: "ci:"
     directory: "/"
     schedule:
       interval: "weekly"
